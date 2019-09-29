@@ -1,6 +1,7 @@
 package com.fabricsoft.freunde.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -24,6 +25,7 @@ public class Friend {
     @JsonIgnore
     boolean married;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     List<Address> addresses;
 

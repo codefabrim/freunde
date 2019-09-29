@@ -1,5 +1,7 @@
 package com.fabricsoft.freunde.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 
@@ -12,6 +14,11 @@ public class Address {
 
     private String street;
     private String city;
+
+    //use BackReference with a FK in Table --> prevent infinite loop
+    @JsonBackReference
+    @ManyToOne
+    Friend friend;
 
     public String getStreet() {
         return street;
@@ -35,5 +42,13 @@ public class Address {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Friend friend) {
+        this.friend = friend;
     }
 }
