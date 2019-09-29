@@ -1,9 +1,14 @@
 package com.fabricsoft.freunde.model;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
-@Embeddable
+
+@Entity
 public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String street;
     private String city;
@@ -22,5 +27,13 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

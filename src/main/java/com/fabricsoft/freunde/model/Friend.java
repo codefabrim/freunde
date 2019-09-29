@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,8 +24,8 @@ public class Friend {
     @JsonIgnore
     boolean married;
 
-    @Embedded
-    Address address;
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Address> addresses;
 
 
     public int getId() {
@@ -68,11 +69,11 @@ public class Friend {
         this.married = married;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }
