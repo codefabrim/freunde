@@ -33,13 +33,13 @@ public class FriendController {
         else
                 throw new ValidationException("Friend cannot be created");
          }
-
-         @ResponseStatus(HttpStatus.BAD_REQUEST)
-         @ExceptionHandler(ValidationException.class)
-         ErrorMessage exceptionHandler(ValidationException e){
-            return new ErrorMessage ("400", e.getMessage());
-
-         }
+//
+//         @ResponseStatus(HttpStatus.BAD_REQUEST)
+//         @ExceptionHandler(ValidationException.class)
+//         ErrorMessage exceptionHandler(ValidationException e){
+//            return new ErrorMessage ("400", e.getMessage());
+//
+//         }
 
 
     //    READ
