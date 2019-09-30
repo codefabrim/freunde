@@ -5,6 +5,7 @@ package com.fabricsoft.freunde.controller;
 
 import com.fabricsoft.freunde.model.Friend;
 import com.fabricsoft.freunde.service.FriendService;
+import com.fabricsoft.freunde.util.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,11 @@ public class FriendController {
                 throw new ValidationException("Friend cannot be created");
          }
 
+         @ResponseStatus(HttpStatus.BAD_REQUEST)
          @ExceptionHandler(ValidationException.class)
-         ResponseEntity<String> exceptionHandler(ValidationException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+         ErrorMessage exceptionHandler(ValidationException e){
+            return new ErrorMessage ("400", e.getMessage());
+
          }
 
 
