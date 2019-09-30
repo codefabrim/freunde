@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
 import java.util.Optional;
 
 @RestController
@@ -22,9 +23,21 @@ public class FriendController {
 
     //    CREATE
     @PostMapping("/friend")
-    Friend create(@RequestBody Friend cfriend) {
-        return friendsService.save(cfriend);
-    }
+    Friend create(@RequestBody Friend cfriend) throws ValidationException {
+//        if (Integer.valueOf(cfriend.getAge()) != null &&
+        if (cfriend.getAge() != 0 &&
+            cfriend.getFirstName() != null &&
+            cfriend.getLastName() != null)
+                return friendsService.save(cfriend);
+        else
+                throw new ValidationException("Friend cannot be created");
+         }
+
+         @ExceptionHandler(ValidationException.class)
+         ResponseEntity<String> exceptionHandler(ValidationException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+         }
+
 
     //    READ
     @GetMapping("/friend")
