@@ -6,6 +6,8 @@ package com.fabricsoft.freunde.controller;
 import com.fabricsoft.freunde.model.Friend;
 import com.fabricsoft.freunde.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -32,9 +34,13 @@ public class FriendController {
 
     //    UPDATE
     @PutMapping("/friend")
-    Friend update(@RequestBody Friend ufriend) {
-        return friendsService.save(ufriend);
-    }
+    ResponseEntity<Friend> update(@RequestBody Friend ufriend) {
+
+        if (friendsService.findById(ufriend.getId()).isPresent())
+            return new ResponseEntity(friendsService.save(ufriend), HttpStatus.OK);
+        else
+            return new ResponseEntity(ufriend, HttpStatus.BAD_REQUEST);
+        }
 
 
     //    DELETE
